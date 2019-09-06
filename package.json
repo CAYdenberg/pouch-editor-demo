@@ -1,0 +1,47 @@
+{
+  "name": "pouch-editor-demo",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "test",
+    "lint": "eslint src/* --config .eslintrc",
+    "start:server": "NODE_ENV=development nodemon server",
+    "start:client": "NODE_ENV=development npx parcel --port 1234 src/index.html",
+    "start": "npm-run-all --parallel start:*"
+  },
+  "keywords": [
+    "pouchdb",
+    "demo",
+    "editor",
+    "syncing",
+    "sync",
+    "conflicts"
+  ],
+  "author": "@CAYdenberg",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "koala-server": "0.0.5",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "nodemon": "^1.19.2",
+    "prettier": "^1.18.2",
+    "prettier-eslint": "^9.0.0"
+  }
+}
