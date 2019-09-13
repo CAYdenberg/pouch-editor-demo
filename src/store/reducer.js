@@ -6,7 +6,8 @@ const defaultState = {
   documentState: null,
   rev: null,
   isDirty: false,
-  hasSaveConflict: false
+  hasSaveConflict: false,
+  existingConflicts: []
 };
 
 export default (initialState = defaultState, action) => {
@@ -52,6 +53,20 @@ export default (initialState = defaultState, action) => {
         editorState: action.value,
         isDirty: false,
         hasSaveConflict: false
+      };
+    }
+
+    case c.CHECK_FOR_CONFLICTS_SUCCESS: {
+      return {
+        ...initialState,
+        existingConflicts: action.conflicts
+      };
+    }
+
+    case c.RESOLVE_CONFLICTS_SUCCESS: {
+      return {
+        ...initialState,
+        existingConflicts: []
       };
     }
 

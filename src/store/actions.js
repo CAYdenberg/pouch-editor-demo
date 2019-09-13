@@ -53,3 +53,26 @@ export const forceSave = data => ({
   response: ({ rev }) => forceSaveSuccess(rev, data),
   error: console.error
 });
+
+export const checkForConflictsSuccess = conflicts => ({
+  type: c.CHECK_FOR_CONFLICTS_SUCCESS,
+  conflicts
+});
+
+export const checkForConflicts = () => ({
+  type: c.CHECK_FOR_CONFLICTS,
+  pouch: db.checkForConflicts(),
+  response: checkForConflictsSuccess,
+  error: console.error
+});
+
+export const resolveConflictsSuccess = () => ({
+  type: c.RESOLVE_CONFLICTS_SUCCESS
+});
+
+export const resolveConflicts = (dataToKeep, revsToRemove) => ({
+  type: c.RESOLVE_CONFLICTS,
+  pouch: db.resolveConflicts(dataToKeep, revsToRemove),
+  response: resolveConflictsSuccess,
+  error: console.error
+});

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { forceSave } from "../store";
 
-const ConflictHandler = () => {
+const SaveConflictHandler = () => {
   const { hasSaveConflict, documentState, editorState } = useSelector(
     state => state
   );
@@ -40,4 +40,4 @@ const ConflictHandler = () => {
   );
 };
 
-export default ConflictHandler;
+export default SaveConflictHandler;
