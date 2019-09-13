@@ -1,10 +1,12 @@
 import c from "./constants";
+import { DEFAULT_DOC_NAME } from "../constants";
 
 const defaultState = {
   editorState: "",
   documentState: null,
   rev: null,
-  isDirty: false
+  isDirty: false,
+  hasSaveConflict: false
 };
 
 export default (initialState = defaultState, action) => {
@@ -33,6 +35,46 @@ export default (initialState = defaultState, action) => {
         documentState: action.value,
         isDirty: false
       };
+    }
+
+    case c.SAVE_CONFLICT: {
+      return {
+        ...initialState,
+        hasSaveConflict: true
+      };
+    }
+
+    case c.FORCE_SAVE_SUCCESS: {
+      return {
+        ...initialState,
+        rev: action.rev,
+        documentState: action.value,
+        editorState: action.value,
+        isDirty: false,
+        hasSaveConflict: false
+      };
+    }
+
+    case "@@koala-redux/CHANGE": {
+      // current document text:
+      const { _rev, data } = action.updates.find(
+        update => update._id === DEFAULT_DOC_NAME
+      );
+
+      // if the editor is no longer up-to-date
+      if (initialState.isDirty) {
+        return {
+          ...initialState,
+          documentState: data
+        };
+      } else {
+        return {
+          ...initialState,
+          documentState: data,
+          editorState: data,
+          rev: _rev
+        };
+      }
     }
   }
 

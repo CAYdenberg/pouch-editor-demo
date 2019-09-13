@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { open, updateEditor, save } from "../store";
+import ConflictHandler from "./ConflictHandler";
 
 const App = () => {
   const editorState = useSelector(state => state.editorState);
@@ -9,6 +10,7 @@ const App = () => {
 
   return (
     <div>
+      <a href="http://localhost:5000/auth/party">Login</a>
       <button type="button" onClick={() => dispatch(open())}>
         Open
       </button>
@@ -20,6 +22,7 @@ const App = () => {
         onChange={e => dispatch(updateEditor(e))}
         placeholder="Start typing here"
       />
+      <ConflictHandler />
     </div>
   );
 };

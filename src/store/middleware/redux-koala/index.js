@@ -1,22 +1,24 @@
-import koalaClient from './koala-client'
-import mapDispatchToPouch from './mapDispatchToPouch'
+import koalaClient from "./koala-client";
+import mapDispatchToPouch from "./mapDispatchToPouch";
 
-export default (remoteUrl) => store => {
-  const actions = mapDispatchToPouch(store.dispatch)
-  const db = koalaClient(remoteUrl, actions)
+export default remoteUrl => store => {
+  const actions = mapDispatchToPouch(store.dispatch);
+  const db = koalaClient(remoteUrl, actions);
 
   return next => action => {
-    next(action)
+    next(action);
 
-    const {pouch} = action
+    const { pouch } = action;
     if (pouch) {
-      const operation = pouch(db, store.getState)
+      const operation = pouch(db, store.getState);
 
-      operation.then(operationResult => {
-        return store.dispatch(action.response(operationResult))
-      }).catch(err => {
-        return store.dispatch(action.error(err))
-      })
+      operation
+        .then(operationResult => {
+          return store.dispatch(action.response(operationResult));
+        })
+        .catch(err => {
+          return store.dispatch(action.error(err));
+        });
     }
-  }
-}
+  };
+};
