@@ -66,7 +66,12 @@ export default (initialState = defaultState, action) => {
     case c.RESOLVE_CONFLICTS_SUCCESS: {
       return {
         ...initialState,
-        existingConflicts: []
+        existingConflicts: [],
+        rev: action.rev,
+        documentState: action.value,
+        editorState: action.value,
+        isDirty: false,
+        hasSaveConflict: false
       };
     }
 

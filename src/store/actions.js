@@ -66,13 +66,15 @@ export const checkForConflicts = () => ({
   error: console.error
 });
 
-export const resolveConflictsSuccess = () => ({
-  type: c.RESOLVE_CONFLICTS_SUCCESS
+export const resolveConflictsSuccess = (rev, dataToKeep) => ({
+  type: c.RESOLVE_CONFLICTS_SUCCESS,
+  rev,
+  value: dataToKeep.data
 });
 
 export const resolveConflicts = (dataToKeep, revsToRemove) => ({
   type: c.RESOLVE_CONFLICTS,
   pouch: db.resolveConflicts(dataToKeep, revsToRemove),
-  response: resolveConflictsSuccess,
+  response: ({ rev }) => resolveConflictsSuccess(rev, dataToKeep),
   error: console.error
 });

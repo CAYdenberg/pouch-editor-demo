@@ -18,9 +18,6 @@ const App = () => {
       <button type="button" onClick={() => dispatch(save(rev, editorState))}>
         Save
       </button>
-      <button type="button" onClick={() => dispatch(save(rev, editorState))}>
-        Save
-      </button>
       <button type="button" onClick={() => dispatch(checkForConflicts())}>
         Check For Conflicts
       </button>
