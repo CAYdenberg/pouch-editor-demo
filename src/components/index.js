@@ -11,23 +11,53 @@ const App = () => {
 
   return (
     <div>
-      <a href="http://localhost:5000/auth/party">Login</a>
-      <button type="button" onClick={() => dispatch(open())}>
-        Open
-      </button>
-      <button type="button" onClick={() => dispatch(save(rev, editorState))}>
-        Save
-      </button>
-      <button type="button" onClick={() => dispatch(checkForConflicts())}>
-        Check For Conflicts
-      </button>
-      <textarea
-        value={editorState}
-        onChange={e => dispatch(updateEditor(e))}
-        placeholder="Start typing here"
-      />
-      <SaveConflictHandler />
-      <ExistingConflictHandler />
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-menu">
+          <div className="navbar-end">
+            <a className="navbar-item" href="http://localhost:5000/auth/party">
+              Login
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <main className="container">
+        <section className="section">
+          <div className="level">
+            <div className="level-left">
+              <button
+                type="button"
+                className="button is-primary"
+                onClick={() => dispatch(open())}
+              >
+                Open
+              </button>
+              <button
+                type="button"
+                className="button is-primary"
+                onClick={() => dispatch(save(rev, editorState))}
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                className="button is-primary"
+                onClick={() => dispatch(checkForConflicts())}
+              >
+                Check For Conflicts
+              </button>
+            </div>
+          </div>
+          <textarea
+            className="textarea"
+            value={editorState}
+            onChange={e => dispatch(updateEditor(e))}
+            placeholder="Start typing here"
+          />
+          <SaveConflictHandler />
+          <ExistingConflictHandler />
+        </section>
+      </main>
     </div>
   );
 };
