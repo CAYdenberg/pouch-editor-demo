@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { resolveConflicts } from "../store";
+import Modal from "./Modal";
 
 const ExistingConflictHandler = () => {
   const conflicts = useSelector(state => state.existingConflicts);
@@ -17,20 +18,22 @@ const ExistingConflictHandler = () => {
   };
 
   return (
-    <table>
-      <tbody>
+    <Modal title="Existing conflict detected">
+      <div className="columns">
         {conflicts.map(({ _rev, data }) => (
-          <tr key={_rev}>
-            <td>{data}</td>
-            <td>
-              <button type="button" onClick={() => keep(_rev)}>
-                Keep this one
-              </button>
-            </td>
-          </tr>
+          <div className="column is-half" key={_rev}>
+            <div>{data}</div>
+            <button
+              type="button"
+              className="button is-info"
+              onClick={() => keep(_rev)}
+            >
+              Keep this one
+            </button>
+          </div>
         ))}
-      </tbody>
-    </table>
+      </div>
+    </Modal>
   );
 };
 
