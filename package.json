@@ -27,7 +27,7 @@
     "bulma": "^0.7.5",
     "bulmaswatch": "^0.7.5",
     "immutability-helper": "^3.0.1",
-    "koala-server": "0.0.5",
+    "koala-server": "^0.0.7",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.3",
     "pouchdb": "^7.1.1",

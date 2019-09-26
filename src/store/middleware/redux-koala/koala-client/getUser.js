@@ -39,7 +39,6 @@ export const update = (oldCredentials, urlParams) => {
 export default () => {
   const existingCredentials = getCredentials();
   const { action, username, token, dbName } = parseUrlHash();
-  console.log(dbName);
 
   const newCredentials = update(existingCredentials, {
     action,
@@ -48,7 +47,6 @@ export default () => {
     token
   });
 
-  console.log(newCredentials);
   setCredentials(newCredentials);
   clearUrlHash();
 
