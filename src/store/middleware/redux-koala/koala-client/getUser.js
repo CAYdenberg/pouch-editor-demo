@@ -1,22 +1,31 @@
-import {getCredentials, setCredentials, parseUrlHash, clearUrlHash} from './utils'
+import {
+  getCredentials,
+  setCredentials,
+  parseUrlHash,
+  clearUrlHash
+} from "./utils";
 
 export const update = (oldCredentials, urlParams) => {
   switch (urlParams.action) {
-    case 'signup':
-    case 'login': {
-      return {username: urlParams.username, token: urlParams.token}
+    case "signup":
+    case "login": {
+      return {
+        username: urlParams.username,
+        token: urlParams.token,
+        dbName: urlParams.dbName
+      };
     }
 
-    case 'fail':
-    case 'logout': {
-      return {username: '', token: ''}
+    case "fail":
+    case "logout": {
+      return { username: "", token: "", dbName: "" };
     }
 
     default: {
-      return oldCredentials
+      return oldCredentials;
     }
   }
-}
+};
 
 // the userid is stored in localStorage
 
@@ -28,18 +37,26 @@ export const update = (oldCredentials, urlParams) => {
 //
 
 export default () => {
-  const existingCredentials = getCredentials()
-  const {action, username, token} = parseUrlHash()
+  const existingCredentials = getCredentials();
+  const { action, username, token, dbName } = parseUrlHash();
+  console.log(dbName);
 
-  const newCredentials = update(existingCredentials, {action, username, token})
+  const newCredentials = update(existingCredentials, {
+    action,
+    username,
+    dbName,
+    token
+  });
 
-  setCredentials(newCredentials)
-  clearUrlHash()
+  console.log(newCredentials);
+  setCredentials(newCredentials);
+  clearUrlHash();
 
   return {
     username: newCredentials.username,
     token: newCredentials.token,
+    dbName: newCredentials.dbName,
     isFirstLoad: existingCredentials.isFirstLoad,
     action
-  }
-}
+  };
+};

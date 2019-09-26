@@ -23,11 +23,11 @@ export default (remoteUrl, actions) => {
     ...actions
   };
 
-  const { action, username, token, isFirstLoad } = getUser();
-  const dbName = username || NOUSER_DB;
+  const { action, username, dbName, token, isFirstLoad } = getUser();
+  const realDbName = dbName || NOUSER_DB;
 
   // provision our new database
-  const db = new PouchDB(dbName);
+  const db = new PouchDB(realDbName);
 
   Promise.all([
     db.createIndex({
@@ -48,7 +48,7 @@ export default (remoteUrl, actions) => {
 
       // sync only if this is a real user database (not unauthenticated)
       if (username) {
-        const remoteDb = new PouchDB(`${remoteUrl}/${username}`, {
+        const remoteDb = new PouchDB(`${remoteUrl}/${realDbName}`, {
           headers: {
             "x-jwt": token
           }
@@ -61,7 +61,7 @@ export default (remoteUrl, actions) => {
       }
     })
   ]).then(() => {
-    onReady(username, dbName, isFirstLoad);
+    onReady(username, realDbName, isFirstLoad);
   });
 
   return db;
