@@ -14,7 +14,10 @@ const App = () => {
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-menu">
           <div className="navbar-end">
-            <a className="navbar-item" href="http://localhost:5000/auth/party">
+            <a
+              className="navbar-item"
+              href="http://localhost:5000/auth/twitter"
+            >
               Login
             </a>
           </div>
