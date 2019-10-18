@@ -7,6 +7,7 @@ import ExistingConflictHandler from "./ExistingConflictHandler";
 const App = () => {
   const editorState = useSelector(state => state.editorState);
   const rev = useSelector(state => state.rev);
+  const isDirty = useSelector(state => state.isDirty);
   const dispatch = useDispatch();
 
   return (
@@ -39,6 +40,7 @@ const App = () => {
                 type="button"
                 className="button is-primary"
                 onClick={() => dispatch(save(rev, editorState))}
+                disabled={!isDirty}
               >
                 Save
               </button>
@@ -59,6 +61,9 @@ const App = () => {
           />
           <SaveConflictHandler />
           <ExistingConflictHandler />
+          <p>
+            _rev: <span style={{ fontFamily: "monospace" }}>{rev}</span>
+          </p>
         </section>
       </main>
     </div>
